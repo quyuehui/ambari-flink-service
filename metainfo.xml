@@ -5,35 +5,43 @@
         <service>
             <name>FLINK</name>
             <displayName>Flink</displayName>
-            <comment>Apache Flink is a streaming dataflow engine that provides data distribution, communication, and fault tolerance for distributed computations over data streams.</comment>
-            <version>1.2</version>
+            <comment>Apache Flink is a streaming dataflow engine that provides data distribution, communication, and
+                fault tolerance for distributed computations over data streams.
+            </comment>
+            <version>1.8</version>
             <components>
                 <component>
-                  <name>FLINK_MASTER</name>
-                  <displayName>Flink</displayName>
-                  <category>MASTER</category>
-                  <cardinality>1</cardinality>
-                  <commandScript>
-                    <script>scripts/flink.py</script>
-                    <scriptType>PYTHON</scriptType>
-                    <timeout>10000</timeout>
-                  </commandScript>
+                    <name>FLINK_MASTER</name>
+                    <displayName>Flink</displayName>
+                    <category>MASTER</category>
+                    <cardinality>1</cardinality>
+                    <commandScript>
+                        <script>scripts/flink.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>10000</timeout>
+                    </commandScript>
                 </component>
             </components>
             <osSpecifics>
-              <osSpecific>
-                <osFamily>redhat6</osFamily>
-                <packages>
-                   <package><name>git</name></package>    
-                   <package><name>java-1.7.0-openjdk-devel</name></package>  
-                   <package><name>apache-maven-3.2*</name></package>                                           
-                </packages>
-              </osSpecific>
-              
+                <osSpecific>
+                    <osFamily>redhat6</osFamily>
+                    <packages>
+                        <package>
+                            <name>git</name>
+                        </package>
+                        <package>
+                            <name>java-1.7.0-openjdk-devel</name>
+                        </package>
+                        <package>
+                            <name>apache-maven-3.2*</name>
+                        </package>
+                    </packages>
+                </osSpecific>
+
             </osSpecifics>
-      	    <configuration-dependencies>
-	        	<config-type>flink-ambari-config</config-type>      	   
-      	    </configuration-dependencies>
+            <configuration-dependencies>
+                <config-type>flink-ambari-config</config-type>
+            </configuration-dependencies>
             <restartRequiredAfterChange>false</restartRequiredAfterChange>
         </service>
     </services>

@@ -2,18 +2,11 @@ import sys, os, pwd, grp, signal, time, glob
 from resource_management import *
 from subprocess import call
 
-
-
-
-
 class Master(Script):
   def install(self, env):
-
     import params
     import status_params
-      
 
-            
     #e.g. /var/lib/ambari-agent/cache/stacks/HDP/2.3/services/FLINK/package
     service_packagedir = os.path.realpath(__file__).split('/scripts')[0] 
             
@@ -30,11 +23,9 @@ class Master(Script):
             group=params.flink_group,
             content=''
     )
-    
 
          
-    
-    #User selected option to use prebuilt flink package 
+    #User selected option to use prebuilt flink package
     if params.setup_prebuilt:
 
       Execute('echo Installing packages')
@@ -104,7 +95,7 @@ class Master(Script):
 
     Execute('echo bin dir ' + params.bin_dir)        
     Execute('echo pid file ' + status_params.flink_pid_file)
-    cmd = format("export HADOOP_CONF_DIR={hadoop_conf_dir}; {bin_dir}/yarn-session.sh -n {flink_numcontainers} -s {flink_numberoftaskslots} -jm {flink_jobmanager_memory} -tm {flink_container_memory} -qu {flink_queue} -nm {flink_appname} -d")
+    cmd = format("export HADOOP_CLASSPATH=`hadoop classpath`; {bin_dir}/yarn-session.sh -n {flink_numcontainers} -s {flink_numberoftaskslots} -jm {flink_jobmanager_memory} -tm {flink_container_memory} -qu {flink_queue} -nm {flink_appname} -d")
     if params.flink_streaming:
       cmd = cmd + ' -st '
     Execute (cmd + format(" >> {flink_log_file}"), user=params.flink_user)
